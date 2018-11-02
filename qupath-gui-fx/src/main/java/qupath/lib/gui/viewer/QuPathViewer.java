@@ -2623,81 +2623,82 @@ public class QuPathViewer implements TileListener<BufferedImage>, PathObjectHier
 				return;
 			}
 
-
-
-
-			if (!(code == KeyCode.LEFT || code == KeyCode.UP || code == KeyCode.RIGHT || code == KeyCode.DOWN))
+			if (!(code == KeyCode.LEFT || code == KeyCode.UP || code == KeyCode.RIGHT || code == KeyCode.DOWN || code == KeyCode.W || code == KeyCode.A || code == KeyCode.S || code == KeyCode.D || code == KeyCode.Q || code == KeyCode.E))
 				return;
 
-			// Use arrow keys to navigate, either or directly or using a TMA grid
-			TMAGrid tmaGrid = hierarchy.getTMAGrid();
-			if (!event.isShiftDown() && tmaGrid != null && tmaGrid.nCores() > 0) {
-				if (event.getEventType() != KeyEvent.KEY_PRESSED)
-					return;
-				PathObject selected = hierarchy.getSelectionModel().getSelectedObject();
-				// Look up the hierarchy for a TMA core
-				while (selected != null && !selected.isTMACore()) {
-					selected = selected.getParent();
-				}
-				int ind = tmaGrid.getTMACoreList().indexOf(selected);
-				int w = tmaGrid.getGridWidth();
-				int h = tmaGrid.getGridHeight();
-				if (ind < 0) {
-					// Find the closest TMA core to the current position
-					double minDisplacementSq = Double.POSITIVE_INFINITY;
-					for (int i = 0; i < tmaGrid.nCores(); i++) {
-						ROI coreROI = tmaGrid.getTMACore(i).getROI();
-						double dx = coreROI.getCentroidX() - getCenterPixelX();
-						double dy = coreROI.getCentroidY() - getCenterPixelY();
-						double displacementSq = dx*dx + dy*dy;
-						if (displacementSq < minDisplacementSq) {
-							ind = i;
-							minDisplacementSq = displacementSq;
-						}
-					}
-				}
+			// // Use arrow keys to navigate, either or directly or using a TMA grid
+			// TMAGrid tmaGrid = hierarchy.getTMAGrid();
+			// if (!event.isShiftDown() && tmaGrid != null && tmaGrid.nCores() > 0) {
+			// 	if (event.getEventType() != KeyEvent.KEY_PRESSED)
+			// 		return;
+			// 	PathObject selected = hierarchy.getSelectionModel().getSelectedObject();
+			// 	// Look up the hierarchy for a TMA core
+			// 	while (selected != null && !selected.isTMACore()) {
+			// 		selected = selected.getParent();
+			// 	}
+			// 	int ind = tmaGrid.getTMACoreList().indexOf(selected);
+			// 	int w = tmaGrid.getGridWidth();
+			// 	int h = tmaGrid.getGridHeight();
+			// 	if (ind < 0) {
+			// 		// Find the closest TMA core to the current position
+			// 		double minDisplacementSq = Double.POSITIVE_INFINITY;
+			// 		for (int i = 0; i < tmaGrid.nCores(); i++) {
+			// 			ROI coreROI = tmaGrid.getTMACore(i).getROI();
+			// 			double dx = coreROI.getCentroidX() - getCenterPixelX();
+			// 			double dy = coreROI.getCentroidY() - getCenterPixelY();
+			// 			double displacementSq = dx*dx + dy*dy;
+			// 			if (displacementSq < minDisplacementSq) {
+			// 				ind = i;
+			// 				minDisplacementSq = displacementSq;
+			// 			}
+			// 		}
+			// 	}
 
-				switch (code) {
-				case LEFT:
-					if (ind >= 0)
-						ind--;
-					else
-						ind = 0;
-					break;
-				case UP:
-					if (ind >= 0)
-						ind -= w;
-					else
-						ind = 0;
-					break;
-				case RIGHT:
-					if (ind >= 0)
-						ind++;
-					else
-						ind = 0;
-					break;
-				case DOWN:
-					if (ind >= 0)
-						ind += w;
-					else
-						ind = 0;
-					break;
-				default:
-					return;
-				}
-				// Set the selected object & center the viewer
-				if (ind >= 0 && ind < w*h) {
-					PathObject selectedObject = tmaGrid.getTMACore(ind);
-					hierarchy.getSelectionModel().setSelectedObject(selectedObject);
-					if (selectedObject != null && selectedObject.hasROI())
-						setCenterPixelLocation(selectedObject.getROI().getCentroidX(), selectedObject.getROI().getCentroidY());
-					//					setSelectedObject(tmaGrid.getTMACore(ind));
-				}
+			// 	switch (code) {
+			// 	case LEFT:
+			// 	case A:
+			// 		if (ind >= 0)
+			// 			ind--;
+			// 		else
+			// 			ind = 0;
+			// 		break;
+			// 	case UP:
+			// 	case W:
+			// 		if (ind >= 0)
+			// 			ind -= w;
+			// 		else
+			// 			ind = 0;
+			// 		break;
+			// 	case RIGHT:
+			// 	case D:
+			// 		if (ind >= 0)
+			// 			ind++;
+			// 		else
+			// 			ind = 0;
+			// 		break;
+			// 	case DOWN:
+			// 	case S:
+			// 		if (ind >= 0)
+			// 			ind += w;
+			// 		else
+			// 			ind = 0;
+			// 		break;
+			// 	default:
+			// 		return;
+			// 	}
+			// 	// Set the selected object & center the viewer
+			// 	if (ind >= 0 && ind < w*h) {
+			// 		PathObject selectedObject = tmaGrid.getTMACore(ind);
+			// 		hierarchy.getSelectionModel().setSelectedObject(selectedObject);
+			// 		if (selectedObject != null && selectedObject.hasROI())
+			// 			setCenterPixelLocation(selectedObject.getROI().getCentroidX(), selectedObject.getROI().getCentroidY());
+			// 		//					setSelectedObject(tmaGrid.getTMACore(ind));
+			// 	}
 				
-				event.consume();
+			// 	event.consume();
 
 				
-			} else if (event.getEventType() == KeyEvent.KEY_PRESSED) {
+			if (event.getEventType() == KeyEvent.KEY_PRESSED && (code == KeyCode.UP || code == KeyCode.DOWN || code == KeyCode.LEFT || code == KeyCode.RIGHT)) {
 
 
 				if (event.isShiftDown()) {
@@ -2773,6 +2774,59 @@ public class QuPathViewer implements TileListener<BufferedImage>, PathObjectHier
 				startMoving(dx, dy);
 				event.consume();
 
+			} else if (event.getEventType() == KeyEvent.KEY_PRESSED && (code == KeyCode.Q || code == KeyCode.E) && !event.isShiftDown()) {
+
+				switch (code) {
+					case E:
+						zoomOut(10);
+						event.consume();
+						return;
+					case Q:
+						zoomIn(10);
+						event.consume();
+						return;
+					default:
+						break;
+				}
+
+			} else if (event.getEventType() == KeyEvent.KEY_PRESSED &&
+					   (code == KeyCode.W || code == KeyCode.A || code == KeyCode.S || code == KeyCode.D) &&
+					   (!event.isAltDown() && !event.isMetaDown() && !event.isControlDown())) {
+
+				long currentTime = System.currentTimeMillis();
+				if (keyDownTime == Long.MIN_VALUE)
+					keyDownTime = currentTime;
+				// Take care of acceleration
+				//				double dt = 0.1*currentTime - 0.1*keyDownTime;
+				//				double scale = 5 * Math.pow(20 + dt, 0.5);
+
+				scale = scale * 1.05;
+				double d = getDownsampleFactor() * scale * 20;
+				if (event.isShiftDown()) {
+					d = d * 0.5;
+				}
+				double dx = 0;
+				double dy = 0;
+				switch (code) {
+				case A:
+					dx = d;
+					break;
+				case W:
+					dy = d;
+					break;
+				case D:
+					dx = -d;
+					break;
+				case S:
+					dy = -d;
+					break;
+				default:
+					return;
+				}
+
+				startMoving(dx, dy);
+				event.consume();
+
 
 			} else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
 				switch (code) {
@@ -2780,6 +2834,10 @@ public class QuPathViewer implements TileListener<BufferedImage>, PathObjectHier
 				case UP:
 				case RIGHT:
 				case DOWN:
+				case W:
+				case A:
+				case S:
+				case D:
 					mover.decelerate();
 					setDoFasterRepaint(false);
 					keyDownTime = Long.MIN_VALUE;

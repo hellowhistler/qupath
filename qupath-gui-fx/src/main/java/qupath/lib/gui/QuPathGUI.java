@@ -3267,7 +3267,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.ELLIPSE), tools));
 			return action;
 		case MOVE_TOOL:
-			action = createSelectableCommandAction(new ToolSelectable(this, Modes.MOVE), "Move tool", Modes.MOVE, new KeyCodeCombination(KeyCode.M));
+			action = createSelectableCommandAction(new ToolSelectable(this, Modes.MOVE), "Move tool", Modes.MOVE, new KeyCodeCombination(KeyCode.Z));
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.MOVE), tools));
 			return action;
 		case POINTS_TOOL:
@@ -3279,7 +3279,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.POLYGON), tools));
 			return action;
 		case BRUSH_TOOL:
-			action = createSelectableCommandAction(new ToolSelectable(this, Modes.BRUSH), "Brush tool", Modes.BRUSH, new KeyCodeCombination(KeyCode.B));
+			action = createSelectableCommandAction(new ToolSelectable(this, Modes.BRUSH), "Brush tool", Modes.BRUSH, new KeyCodeCombination(KeyCode.X));
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.BRUSH), tools));
 			return action;
 		case RECTANGLE_TOOL:
@@ -3287,7 +3287,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.RECTANGLE), tools));
 			return action;
 		case WAND_TOOL:
-			action = createSelectableCommandAction(new ToolSelectable(this, Modes.WAND), "Wand tool", Modes.WAND, new KeyCodeCombination(KeyCode.W));
+ 			action = createSelectableCommandAction(new ToolSelectable(this, Modes.WAND), "Wand tool", Modes.WAND, new KeyCodeCombination(KeyCode.C));
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.WAND), tools));
 			return action;
 		case SHOW_GRID:
@@ -3301,7 +3301,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 		case SHOW_ANALYSIS_PANEL:
 			// I don't understand why registering a listener within the ShowAnalysisPanelSelectable constructor didn't work... but it didn't
 			ShowAnalysisPanelSelectable temp = new ShowAnalysisPanelSelectable(pane, splitPane, analysisPanel, viewerManager, true);
-			action = createSelectableCommandAction(temp.showPanelProperty(), "Show analysis panel", PathIconFactory.PathIcons.MEASURE, new KeyCodeCombination(KeyCode.A, KeyCombination.SHIFT_DOWN));
+			action = createSelectableCommandAction(temp.showPanelProperty(), "Show analysis panel", PathIconFactory.PathIcons.MEASURE, new KeyCodeCombination(KeyCode.Q, KeyCombination.SHIFT_DOWN));
 			action.selectedProperty().addListener((e, f, g) -> temp.setAnalysisPanelVisible(g));
 			return action;
 		case ZOOM_TO_FIT:
@@ -3323,7 +3323,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 		case SAVE_DATA:
 			return createCommandAction(new SerializeImageDataCommand(this, true), "Save", null, new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));
 		case SHOW_ANNOTATIONS:
-			return createSelectableCommandAction(overlayOptions.showAnnotationsProperty(), "Show annotations", PathIconFactory.PathIcons.ANNOTATIONS, new KeyCodeCombination(KeyCode.A));
+			return createSelectableCommandAction(overlayOptions.showAnnotationsProperty(), "Show annotations", PathIconFactory.PathIcons.ANNOTATIONS, new KeyCodeCombination(KeyCode.T));
 		case FILL_ANNOTATIONS:
 			return createSelectableCommandAction(overlayOptions.fillAnnotationsProperty(), "Fill annotations", PathIconFactory.PathIcons.ANNOTATIONS_FILL, new KeyCodeCombination(KeyCode.F, KeyCombination.SHIFT_DOWN));	
 		case SHOW_TMA_GRID:
