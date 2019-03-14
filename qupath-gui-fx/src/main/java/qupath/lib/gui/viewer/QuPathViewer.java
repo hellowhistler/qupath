@@ -2701,46 +2701,46 @@ public class QuPathViewer implements TileListener<BufferedImage>, PathObjectHier
 			if (event.getEventType() == KeyEvent.KEY_PRESSED && (code == KeyCode.UP || code == KeyCode.DOWN || code == KeyCode.LEFT || code == KeyCode.RIGHT)) {
 
 
-				if (event.isShiftDown()) {
+				// if (event.isShiftDown()) {
 
-					//					// TODO: Handle changes in focus or time point
-					//					if (event.isAltDown() || event.isMetaDown() || event.isControlDown()) {
-					//						switch (code) {
-					//						case UP:
-					//							if (sliderZ != null)
-					//								sliderZ.setValue(sliderZ.getValue() + 1);
-					//							return;
-					//						case DOWN:
-					//							if (sliderZ != null)
-					//								sliderZ.setValue(sliderZ.getValue() - 1);
-					//							return;
-					//						case LEFT:
-					//							if (sliderT != null)
-					//								sliderT.setValue(sliderT.getValue() - 1);
-					//							return;
-					//						case RIGHT:
-					//							if (sliderT != null)
-					//								sliderT.setValue(sliderT.getValue() + 1);
-					//							return;
-					//						default:
-					//							break;
-					//						}
-					//					}
+				// 	//					// TODO: Handle changes in focus or time point
+				// 	//					if (event.isAltDown() || event.isMetaDown() || event.isControlDown()) {
+				// 	//						switch (code) {
+				// 	//						case UP:
+				// 	//							if (sliderZ != null)
+				// 	//								sliderZ.setValue(sliderZ.getValue() + 1);
+				// 	//							return;
+				// 	//						case DOWN:
+				// 	//							if (sliderZ != null)
+				// 	//								sliderZ.setValue(sliderZ.getValue() - 1);
+				// 	//							return;
+				// 	//						case LEFT:
+				// 	//							if (sliderT != null)
+				// 	//								sliderT.setValue(sliderT.getValue() - 1);
+				// 	//							return;
+				// 	//						case RIGHT:
+				// 	//							if (sliderT != null)
+				// 	//								sliderT.setValue(sliderT.getValue() + 1);
+				// 	//							return;
+				// 	//						default:
+				// 	//							break;
+				// 	//						}
+				// 	//					}
 
 
-					switch (code) {
-					case UP:
-						zoomOut(10);
-						event.consume();
-						return;
-					case DOWN:
-						zoomIn(10);
-						event.consume();
-						return;
-					default:
-						break;
-					}
-				}
+				// 	switch (code) {
+				// 	case UP:
+				// 		zoomOut(10);
+				// 		event.consume();
+				// 		return;
+				// 	case DOWN:
+				// 		zoomIn(10);
+				// 		event.consume();
+				// 		return;
+				// 	default:
+				// 		break;
+				// 	}
+				// }
 
 
 				long currentTime = System.currentTimeMillis();
@@ -2778,11 +2778,11 @@ public class QuPathViewer implements TileListener<BufferedImage>, PathObjectHier
 
 				switch (code) {
 					case E:
-						zoomOut(10);
+						zoomOut(20);
 						event.consume();
 						return;
 					case Q:
-						zoomIn(10);
+						zoomIn(20);
 						event.consume();
 						return;
 					default:

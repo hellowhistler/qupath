@@ -3275,7 +3275,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.POINTS), tools));
 			return action;
 		case POLYGON_TOOL:
-			action = createSelectableCommandAction(new ToolSelectable(this, Modes.POLYGON), "Polygon tool", Modes.POLYGON, new KeyCodeCombination(KeyCode.P));
+			action = createSelectableCommandAction(new ToolSelectable(this, Modes.POLYGON), "Polygon tool", Modes.POLYGON, new KeyCodeCombination(KeyCode.C));
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.POLYGON), tools));
 			return action;
 		case BRUSH_TOOL:
@@ -3287,7 +3287,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.RECTANGLE), tools));
 			return action;
 		case WAND_TOOL:
- 			action = createSelectableCommandAction(new ToolSelectable(this, Modes.WAND), "Wand tool", Modes.WAND, new KeyCodeCombination(KeyCode.C));
+ 			action = createSelectableCommandAction(new ToolSelectable(this, Modes.WAND), "Wand tool", Modes.WAND, new KeyCodeCombination(KeyCode.P));
 			action.disabledProperty().bind(Bindings.createBooleanBinding(() -> !tools.containsKey(Modes.WAND), tools));
 			return action;
 		case SHOW_GRID:
