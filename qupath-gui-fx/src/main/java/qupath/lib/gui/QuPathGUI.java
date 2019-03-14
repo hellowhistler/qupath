@@ -1630,7 +1630,13 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 					options.setOpacity((float)(options.getOpacity() + scrollUnits * 0.001));
 					return;
 				}
-				
+
+				// Don't scroll when dragging up/down on the touchscreen with shift held, unless in move mode
+				if (e.getTouchCount() != 0 && getMode() != Modes.MOVE) {
+					e.consume();
+					return;
+				}
+
 				if (PathPrefs.getInvertScrolling())
 					scrollUnits = -scrollUnits;
 				double newDownsampleFactor = viewer.getDownsampleFactor() * Math.pow(viewer.getDefaultZoomFactor(), scrollUnits);
